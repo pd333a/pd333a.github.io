@@ -4,7 +4,8 @@ permalink: "/about/"
 layout: page
 ---
 
-Hi, I am Priyam . Currently I am working as a data engineer at Accenture and an ex-intern @ IBM
+Hi, I am Priyam . Currently I am working as a data engineer at Accenture and an ex-intern @ IBM. I love researching and building stuffs,doing experimentations. I am particularly interested towards consciuosness,LLM interpretability(feels like a tool to decode language model's own consciouness),reasoning,neuroscience along with system-level stuffs like inferencing,distributed systems,algo trading, scaling, startups,chips,biotech,gpu,h/w,infra.
+
 
 
 
