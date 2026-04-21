@@ -20,6 +20,8 @@ Direct Answer: "23 + 48 = 71"
 
 After this comes tokenization,which is the process of converting raw text into token ids and there is an embedding matrix for all such ids which can convert each id into an embedding vector in the vocabulary vector space storing various directional and positional information.
 
+![Tokenizer](/assets/Screenshot 2026-04-22 014347.png)
+Screenshot 2026-04-22 014347.png
 
 The above code is important since the tokenize function returns a dictionary consisting of multiple keys like in  the below format
 
