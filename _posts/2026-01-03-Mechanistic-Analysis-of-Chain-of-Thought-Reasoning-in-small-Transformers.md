@@ -1,4 +1,3 @@
-       Mechanistic Analysis of Chain-of-Thought Reasoning in small Transformers
 
 In our daily life, when we provide mathematical simple problems  like “1+2=?” to a transformer, we see that it induces certain steps and provides answer as 3 but the question that arises here is that the intermediate steps that are a part of the inferencing are just some pattern-matching steps w.r.t some pre-trained material or are the steps directly influencing the model during the answer generation stage. In fact, if we go through Jason Wei’s chain-of-thought paper, we can observe that CoT[Chain-of-Thought] prompting definitely helps the model do better in reasoning based tasks but the above paper is an empirical one meaning it does not provide why it happens rather it defines performance improvements across multiple tasks . So, the below experimentation is an attempt to just see what happens under the hood of small transformer when it fed with CoT based samples inspired by some of the best works like  nostalgebraist’s gpt interpretation, Neel Nanda’s Grokking paper and special tutorial blogs.
 First of all, what I feel is that mechanistic interpretability is a method to understand the internal algorithm that a LLM has learned after training it vasts amount of data. The main investigation that we will do in this project is to  validate certain claims/assumptions:
@@ -8,13 +7,8 @@ SETUP
 In order to validate those assumptions, I  proceeded considering a small pre-trained LLM GPT2 with the simple  dataset of two-digit addition since it explicitly uses reasoning as its intermediate steps. Specifically speaking, I used HuggingFace’s GPT2LMHeadModel fine-tuned from the pretrained “gpt2” checkpoint. The model has 12 transformer layers, 12 attention heads per layer, 768-dimensional embeddings, and approximately 124M parameters. I used the standard GPT-2 BPE tokenizer. Both conditions are trained from the same pretrained checkpoint to ensure fair comparison. The reason for choosing the specific variant of LLM is that the LLM consists of comparatively smaller number of parameter and hence can be finetuned in a single gpu instance in the Google Colab. 
 
 
-Parameter	Value
-Base model	GPT-2 (124M params)
-Layers / Heads	12 / 12
-Embedding dim	768
-Tokenizer	GPT-2 BPE (50,257 tokens)
-Sequence length	64 tokens (padded)
-Training data	10,000 examples (90/10 split)
+<img width="482" height="193" alt="image" src="https://github.com/user-attachments/assets/acb576c1-b6b2-4a92-a29b-a36909356f7b" />
+
 
 The training data is generated synthetically in 2 formats : 1.CoT    and     2.Direct Answer
 For CoT, we generated the data in string format consisting of explicit reasoning steps whereas the direct answer based data is consisting of only numeric computation results
