@@ -10,6 +10,7 @@ First of all, what I feel is that mechanistic interpretability is a method to un
 
 In order to validate those assumptions, I  proceeded considering a small pre-trained LLM GPT2 with the simple  dataset of two-digit addition since it explicitly uses reasoning as its intermediate steps. Specifically speaking, I used HuggingFace’s GPT2LMHeadModel fine-tuned from the pretrained “gpt2” checkpoint. The model has 12 transformer layers, 12 attention heads per layer, 768-dimensional embeddings, and approximately 124M parameters. I used the standard GPT-2 BPE tokenizer. Both conditions are trained from the same pretrained checkpoint to ensure fair comparison. The reason for choosing the specific variant of LLM is that the LLM consists of comparatively smaller number of parameter and hence can be finetuned in a single gpu instance in the Google Colab. 
 
+![llm_parameters](/assets/Screenshot 2026-04-22 003821.png)
 
 The training data is generated synthetically in 2 formats : 1.CoT    and     2.Direct Answer
 
