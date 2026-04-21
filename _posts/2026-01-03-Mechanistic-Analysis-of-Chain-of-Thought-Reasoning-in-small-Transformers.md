@@ -24,6 +24,7 @@ After this comes tokenization,which is the process of converting raw text into t
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
 
+{% highlight ruby %}
 def tokenize_function(example):
     tokens = tokenizer(
         example["text"],
@@ -33,6 +34,7 @@ def tokenize_function(example):
     )
     tokens["labels"] = tokens["input_ids"].copy()
     return tokens
+{% highlight ruby %}
 The above code is important since the tokenize function returns a dictionary consisting of multiple keys like in  the below format
 {
   "input_ids": [...],
