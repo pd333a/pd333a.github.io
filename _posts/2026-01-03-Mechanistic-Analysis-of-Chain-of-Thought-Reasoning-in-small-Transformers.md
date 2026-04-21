@@ -7,8 +7,13 @@ SETUP
 In order to validate those assumptions, I  proceeded considering a small pre-trained LLM GPT2 with the simple  dataset of two-digit addition since it explicitly uses reasoning as its intermediate steps. Specifically speaking, I used HuggingFace’s GPT2LMHeadModel fine-tuned from the pretrained “gpt2” checkpoint. The model has 12 transformer layers, 12 attention heads per layer, 768-dimensional embeddings, and approximately 124M parameters. I used the standard GPT-2 BPE tokenizer. Both conditions are trained from the same pretrained checkpoint to ensure fair comparison. The reason for choosing the specific variant of LLM is that the LLM consists of comparatively smaller number of parameter and hence can be finetuned in a single gpu instance in the Google Colab. 
 
 
-
-
+Parameter	Value
+Base model	GPT-2 (124M params)
+Layers / Heads	12 / 12
+Embedding dim	768
+Tokenizer	GPT-2 BPE (50,257 tokens)
+Sequence length	64 tokens (padded)
+Training data	10,000 examples (90/10 split)
 
 The training data is generated synthetically in 2 formats : 1.CoT    and     2.Direct Answer
 For CoT, we generated the data in string format consisting of explicit reasoning steps whereas the direct answer based data is consisting of only numeric computation results
@@ -18,7 +23,6 @@ After this comes tokenization,which is the process of converting raw text into t
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
 
-{% highlight ruby %}
 def tokenize_function(example):
     tokens = tokenizer(
         example["text"],
@@ -28,7 +32,6 @@ def tokenize_function(example):
     )
     tokens["labels"] = tokens["input_ids"].copy()
     return tokens
-{% highlight ruby %}
 The above code is important since the tokenize function returns a dictionary consisting of multiple keys like in  the below format
 {
   "input_ids": [...],
@@ -66,6 +69,5 @@ There are 2 scenarios that we have to consider here: 1. There is a dependency on
 From the above considerations, we can say that the model is somewhat behaving as a mixed/hybrid way.It might be using 2 types of channels. In one channel, it reads the reasoning tokens sequentially, uses the carry information, follows the step order. Also, there can be a another latent channel where the model performs computations in the residual stream without considering the intermediate reasoning tokens when done in the case of direct-answer training.
 Some important stuffs that can be tried upon:
 For this experiment, we used an already pre-trained model which was initially having prior knowledge in numbers and also we used a smaller scale model to facilitate faster model training through single gpu. So, we would like to train a large scale model without any pre-training in order to capture whether the model develops any raw internal algorithm or does it develop any specialized circuit that enables efficient reasoning in multiple such tasks.
-
 
 
