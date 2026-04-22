@@ -57,7 +57,7 @@ Now, I can make an observation on the basis of the behaviour of the direct answe
 These experiments were done to determine the influence of the reasoning tokens on the model’s own behaviour. 
 Experiment 1: Full removal. I took CoT test sequences and deleted all reasoning tokens, converting "23 + 48 = 3+8=11, write 1 carry 1; 2+4+1=7 → 71" into just "23 + 48 = 71". Then I measured accuracy.
 
-The accuracy dropped by roughly 65%.
+The accuracy dropped by roughly 81.5%.
 This implied that the model is completely dependent upon the reasoning tokens and is using those as reference to compute the final answer.
 
 Experiment 2: Shuffling. I kept all the same reasoning tokens but randomized their order. If the model just needs the presence of reasoning-like tokens, shuffling shouldn't matter. If it uses the sequence of steps, shuffling should impact accuracy.
@@ -73,6 +73,8 @@ Experiment 4: Partial ablation. Here instead of removing all reasoning, I remove
 •	Remove just the ones addition ("3+8=11")
 •	Remove just the tens addition ("2+4+1=7")
 The carry step caused the largest accuracy drop when removed. By a good margin. This makes complete mechanistic sense: the carry is the one piece of information that must flow from the ones computation to the tens computation. It's the inter-column dependency. Without it, the model has to figure out the carry implicitly, and it can't do that reliably.
+
+![llm_graph](/assets/TransformerGraphA.png)
 
 **Some observations that we can make out of this experiment:**
 There are 2 scenarios that we have to consider here: 1. There is a dependency on intermediate reasoning tokens that we can confirm from the causal experiment and also we have to consider the fact that 2. There is also some moderate level accuracy associated with the direct model which we also have to consider since in that case it is not taking help of those reasoning tokens.
