@@ -85,4 +85,5 @@ From the above considerations, we can say that the model is somewhat behaving as
 
 For this experiment, we used an already pre-trained model which was initially having prior knowledge in numbers and also we used a smaller scale model to facilitate faster model training through single gpu. So, we would like to train a large scale model without any pre-training in order to capture whether the model develops any raw internal algorithm or does it develop any specialized circuit that enables efficient reasoning in multiple such tasks.
 
+[Colab Code](https://colab.research.google.com/drive/1PHkurHtsyZdmCME1gS3uyLFI5_Aq4D66?usp=sharing) for the above experiment
 
